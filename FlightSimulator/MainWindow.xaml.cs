@@ -27,7 +27,7 @@ namespace FlightSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Roei");
+            Console.WriteLine("testing");
         }
     }
 }
