@@ -24,10 +24,5 @@ namespace FlightSimulator
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("Changing from Roei to Asaf");
-        }
     }
 }
