@@ -6,15 +6,54 @@
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:views="clr-namespace:FlightSimulator.views" x:Class="FlightSimulator.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="Connection Window" Height="600" Width="1000" FontSize="25">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="700*"/>
-            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
-        <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="234" Margin="36,35,0,0" VerticalAlignment="Top" Width="227"/>
-        <Viewbox Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="10,327,0,0" VerticalAlignment="Top" Width="278">
-            <views:joystick Height="357" Width="396"/>
-        </Viewbox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <!--Define our window background-->
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Roei PC\source\repos\Asaf-Jerbi\FlightSimulatorApp\FlightSimulator\IsraelAirPlan.png"/>
+        </Grid.Background>
+        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="35" Margin="10" FontWeight="Bold"
+                   Grid.ColumnSpan="2">
+            Enter Your Server Information
+        </TextBlock>
+        <!--ip field-->
+        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="28" FontWeight="SemiBold" Margin="10">
+            Ip Address
+        </TextBlock>
+        <TextBox x:Name="ipAddress" Grid.Row="2" Grid.Column="2" Width="300" Margin="10" >
+            
+        </TextBox>
+        <!--port field-->
+        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="28" FontWeight="SemiBold" Margin="5">
+            Port
+        </TextBlock>
+        <TextBox x:Name="port" Grid.Row="3" Grid.Column="2" Width="300" Margin="10" >
+
+        </TextBox>
+        <!--make connection button-->
+        <Button x:Name="connectButton" Content="Connect" Grid.Row="4" Grid.Column="4" 
+                Margin="10" MaxHeight="50" MaxWidth="150" Background="LawnGreen"
+                FontWeight="Bold" Click="connectButton_Click"/>
+        <Button x:Name="ExitButton" Content="Exit" Grid.Row="5" Grid.Column="4" 
+                Margin="10" MaxHeight="50" MaxWidth="150" Background="red"
+                FontWeight="Bold" Click="connectButton_Click"/>
     </Grid>
 </Window>
