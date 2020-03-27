@@ -24,10 +24,7 @@ namespace FlightSimulator
 
 
         //Properties in the view model (for binding):\
-        public double VM_Heading
-        {
-            get {  return model.Hea}
-        }
+ 
 
         
     }
