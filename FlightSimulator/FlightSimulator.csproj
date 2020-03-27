@@ -116,5 +116,11 @@
   <ItemGroup>
     <Resource Include="airplane.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ELAL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IsraelAirPlan.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

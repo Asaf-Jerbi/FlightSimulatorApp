@@ -32,7 +32,7 @@ namespace FlightSimulator
         public string read()
         {
             networkStream = new NetworkStream(socket);
-            networkStream.Read
+            //networkStream.Read;
             //networkStream.Write("aa", 0, 0);
             ////Console.WriteLine("Writed successfully");
             ///
