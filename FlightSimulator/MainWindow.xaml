@@ -13,8 +13,20 @@
             <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
         <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="234" Margin="36,35,0,0" VerticalAlignment="Top" Width="227"/>
-        <Viewbox Grid.Column="1" HorizontalAlignment="Left" Height="232" Margin="10,327,0,0" VerticalAlignment="Top" Width="278">
-            <views:joystick Height="357" Width="396"/>
-        </Viewbox>
+
+        <views:joystick Margin="642,327,-150,-210" RenderTransformOrigin="0,0" Grid.ColumnSpan="2">
+            <views:joystick.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="0.5" ScaleX="0.5"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.162"/>
+                    <TranslateTransform X="9E-06" Y="4.5E-05"/>
+                </TransformGroup>
+            </views:joystick.RenderTransform>
+        </views:joystick>
+        <Image HorizontalAlignment="Left" Height="26" Margin="302,301,0,0" VerticalAlignment="Top" Width="30" Source="airplane.png"/>
+        <Button Content="Connect" HorizontalAlignment="Left" Height="88" Margin="206,110,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
+        <Slider HorizontalAlignment="Left" Margin="379,381,0,0" VerticalAlignment="Top" Height="63" Width="305"/>
+
     </Grid>
 </Window>

@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FlightSimulatorModel.cs" />
+    <Compile Include="FlightSimulatorViewModel.cs" />
+    <Compile Include="IFightSimulatorModel.cs" />
+    <Compile Include="ITelnetClient.cs" />
+    <Compile Include="MyTelnetClient.cs" />
     <Compile Include="views\joystick.xaml.cs">
       <DependentUpon>joystick.xaml</DependentUpon>
     </Compile>
@@ -100,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="airplane.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

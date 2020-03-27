@@ -20,9 +20,20 @@ namespace FlightSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        FlightSimulatorViewModel fs_vm;
+
         public MainWindow()
         {
             InitializeComponent();
+            //note: the view (main wondow) knows only the view model and doesn't know the model).
+            fs_vm = new FlightSimulatorViewModel(new FlightSimulatorModel(new MyTelnetClient()));
+            DataContext = fs_vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {           
+            //todo: change in window two fields of
         }
     }
 }
