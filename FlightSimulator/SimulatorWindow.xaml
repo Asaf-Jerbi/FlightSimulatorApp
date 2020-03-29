@@ -1,31 +1,143 @@
-﻿<Window x:Class="FlightSimulator.SimulatorWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FlightSimulator"
+        xmlns:local="clr-namespace:FlightSimulator" xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:views="clr-namespace:FlightSimulator.views" x:Class="FlightSimulator.SimulatorWindow"
         mc:Ignorable="d"
         Title="SimulatorWindow" Height="450" Width="800">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition  />
+            <ColumnDefinition  />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <!--Define our window background-->
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Roei PC\source\repos\Asaf-Jerbi\FlightSimulatorApp\FlightSimulator\ElAl.png"/>
+            <ImageBrush ImageSource="/ElAl.png"/>
         </Grid.Background>
+        <Border BorderBrush="Black" BorderThickness="3" 
+                Grid.Row="1" Grid.Column="1" Margin="3">
+            <Grid Grid.Row="1" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="auto"/>
+                    <ColumnDefinition  />
+                    <ColumnDefinition  Width="auto"/>
+                    <ColumnDefinition  />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Ellipse x:Name="error1" Grid.Row="0" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
+                     Height="10" Width="10" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                       FontSize="15" FontWeight="SemiBold"><Run Text="error1"/></TextBlock>
+                <Ellipse x:Name="error2" Grid.Row="1" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
+                     Height="10" Width="10" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                       FontSize="15" FontWeight="SemiBold"><Run Text="error2"/></TextBlock>
+                <Ellipse x:Name="error3" Grid.Row="2" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
+                     Height="10" Width="10" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                       FontSize="15" FontWeight="SemiBold"><Run Text="error3"/></TextBlock>
+                <Button Grid.Column="3" Grid.Row="1" Margin="10"
+                        Grid.RowSpan="3" MaxWidth="150" FontWeight="Bold"
+                        Background="#FFFF2727" Click="Button_Click" BorderBrush="Black"
+                        BorderThickness="3" Content="Disconnect"/>
+
+            </Grid>
+        </Border>
+
+        <m:Map x:Name="myMap" CredentialsProvider="kCJ1XBT1q5tpaOvjJsUa~JEDXylGa1P_YZ99KJ5qdPQ~Ah0_Rj2rku_BMbqcq0FBsXv3w2fzLlstrzliLkHEQLMFN5VlSN5WQolhiF8UCW3H" 
+            Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" Center="32.00,34.88" ZoomLevel="12"
+               Mode="AerialWithLabels" Margin="3">
+            <m:Pushpin Location ="32.00,34.88"/>
+        </m:Map>
+        <Border BorderBrush="Black" BorderThickness="3" 
+                Grid.Row="1" Grid.Column="2" Margin="2">
+
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                    <ColumnDefinition  Width="auto"/>
+                    <ColumnDefinition  />
+                    <ColumnDefinition  Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"
+                       FontWeight="Bold" FontStyle="Italic"><Run Text="Dash Board"/></TextBlock>
+                <!--Indicated heading deg-->
+                <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="2"
+                       FontSize="10"><Run Text="Indicated heading deg"/></TextBlock>
+                <TextBlock x:Name="headingDeg" Grid.Row="1" Grid.Column="1" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Indicated vertical speed-->
+                <TextBlock Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated vertical speed"/></TextBlock>
+                <TextBlock x:Name="verticalSpeed" Grid.Row="2" Grid.Column="1" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Indicated ground speed-->
+                <TextBlock Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated ground speed"/></TextBlock>
+                <TextBlock x:Name="groundSpeed" Grid.Row="3" Grid.Column="1" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Indicated speed-->
+                <TextBlock Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated speed"/></TextBlock>
+                <TextBlock x:Name="speed" Grid.Row="4" Grid.Column="1" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Gps Altitude-->
+                <TextBlock Grid.Row="1" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated speed"/></TextBlock>
+                <TextBlock x:Name="gpsAltitude" Grid.Row="1" Grid.Column="3" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Gps Altitude-->
+                <TextBlock Grid.Row="2" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Inernal roll"/></TextBlock>
+                <TextBlock x:Name="internalRoll" Grid.Row="2" Grid.Column="3" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Internal Roll-->
+                <TextBlock Grid.Row="3" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Inernal pitch"/></TextBlock>
+                <TextBlock x:Name="internalPitch" Grid.Row="3" Grid.Column="3" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                <!--Gps Altitude-->
+                <TextBlock Grid.Row="4" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Altimeter altitude"/></TextBlock>
+                <TextBlock x:Name="altimeterAltitude" Grid.Row="4" Grid.Column="3" FontWeight="SemiBold"
+                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+            </Grid>
+        </Border>
+        <!--Controls-->
+        <Border BorderBrush="Black" BorderThickness="3" 
+                Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Joystick-->
+            </Grid>
+        </Border>
     </Grid>
+
+
 </Window>
