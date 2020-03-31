@@ -33,22 +33,24 @@ namespace FlightSimulator
 
         public void disconnect()
         {
-            stop = true;
+            this.stop = true;
             this.telnetClient.disconnect();
         }
 
         public void start()
         {
-            new Thread(delegate ()
-                {
-                    
-                    telnetClient.write("get rudder"); //TODO: here can be sent string to server 
-                    Rudder = Double.Parse(telnetClient.read());
-                    Elevator = Double.Parse(telnetClient.read());
-                    Aileron = Double.Parse(telnetClient.read());
-                    Throttle = Double.Parse(telnetClient.read());
-                    Thread.Sleep(250); //sleeping for 1/4 second.
-                }).Start();
+            //new Thread(delegate ()
+            //    {
+
+            telnetClient.write("set /controls/engines/current-engine/throttle 0.5/n");
+            Throttle = Double.Parse(telnetClient.read());
+            Console.WriteLine("************\n************\n************\n************\n************\n************\n************\n");
+            //Console.WriteLine("{0}", Throttle);
+            /*                    Rudder = Double.Parse(telnetClient.read());
+                                Elevator = Double.Parse(telnetClient.read());
+                                Aileron = Double.Parse(telnetClient.read());*/
+            //Thread.Sleep(250); //sleeping for 1/4 second.
+            //}).Start();
         }
     }
 }

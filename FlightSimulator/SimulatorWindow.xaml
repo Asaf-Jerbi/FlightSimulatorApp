@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <!--Define our window background-->
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\Roei PC\source\repos\Asaf-Jerbi\FlightSimulatorApp\FlightSimulator\ElAl.png"/>
+            <ImageBrush ImageSource="ElAl.png"/>
         </Grid.Background>
     </Grid>
 </Window>

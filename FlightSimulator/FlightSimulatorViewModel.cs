@@ -10,22 +10,67 @@ namespace FlightSimulator
     class FlightSimulatorViewModel : INotifyPropertyChanged
     {
         private IFightSimulatorModel model;
+        private string _ip;
+        private int _port;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public string _Ip
+        {
+            get { return this._ip; }
+            set
+            {
+                if (_ip != value)
+                {
+                    _ip = value;
+                    OnPropertyChanged("_Ip");
+                }
+            }
+        }
+
+        public int _Port
+        {
+            get { return this._port; }
+            set
+            {
+                if (_port != value)
+                {
+                    _port = value;
+                    OnPropertyChanged("_Port");
+                }
+            }
+        }
+
+
+        public double Throttle
+        {
+            get
+            {
+                return model.Throttle;
+            }            
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        
+        
         public FlightSimulatorViewModel(IFightSimulatorModel model)
         {
             this.model = model;
             model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
-                    //Implementation missing here
+                    OnPropertyChanged("VM_" + e.PropertyName);
                 };
         }
 
 
-        //Properties in the view model (for binding):\
- 
+        public void connect()
+        {            
+            this.model.connect(_Ip, _Port);
+            this.model.start();
+        }       
 
-        
     }
 }

@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FlightSimulator
 {
@@ -32,32 +34,28 @@ namespace FlightSimulator
             DataContext = fs_vm;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {           
-            //todo: change in window two fields of
-        }
-
-        //public String ipAddress
-        //{
-        //    get { return ipAddress; }
-        //    set { ipAddress = value; }
-        //}
-
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
 
+            try
+                {
+                    //connect to server                     
+                    this.fs_vm.connect();
+                    //open new window with the simulator after making the connection
+                    SimulatorWindow objSimulator = new SimulatorWindow();
+                    this.Visibility = Visibility.Hidden;
+                    objSimulator.Show();
+                }
+                catch (Exception exception)
+                {
+                    this.errorLabel.Visibility = Visibility.Visible;
+                }     
+        }
 
-            connectButton.MaxWidth = 200;
-            connectButton.Content = "Connecting...";
-
-
-            //Make here connection to server with a thread and then go to next page
-
-            //open new window with the simulator after making the connection
-            SimulatorWindow objSimulator = new SimulatorWindow();
-            this.Visibility = Visibility.Hidden;
-            objSimulator.Show();
-            
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.ipAddress.Text = "127.0.0.1";
+            this.port.Text = "5402";
         }
     }
 }

@@ -54,7 +54,7 @@ namespace FlightSimulator.views
             knobPosition.X = 0;
             knobPosition.Y = 0;
         }
-
+        
         private void Knob_MouseLeave(object sender, MouseEventArgs e)
         {
             knobPosition.X = 0;
