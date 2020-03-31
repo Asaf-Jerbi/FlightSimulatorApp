@@ -9,6 +9,9 @@
         Title="SimulatorWindow" Height="450" Width="800">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="ELAL.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition  />
@@ -24,9 +27,6 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <!--Define our window background-->
-        <Grid.Background>
-            <ImageBrush ImageSource="/ElAl.png"/>
-        </Grid.Background>
         <Border BorderBrush="Black" BorderThickness="3" 
                 Grid.Row="1" Grid.Column="1" Margin="3">
             <Grid Grid.Row="1" Grid.Column="1" >
@@ -125,18 +125,56 @@
                 Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
+                <!--Throttle slider-->
+                <TextBlock HorizontalAlignment="Center" Margin="2" Grid.Row="1" TextWrapping="Wrap"
+                           Text="THROTTLE" FontWeight="Bold" VerticalAlignment="Bottom"
+                           Grid.ColumnSpan="2"/>
+                <Slider Name="throttleSlider" HorizontalAlignment="Center" Margin="2" Grid.Row="2"
+                        VerticalAlignment="Top" Height="95" Grid.Column="0"
+                        Grid.ColumnSpan="2" Maximum="1" Minimum="0"
+                        Grid.RowSpan="3" Width="14" Orientation="Vertical"
+                        IsSnapToTickEnabled="False" ValueChanged="throttleSlider_ValueChanged"/>
+                <!--Rudder slider-->
+                <TextBlock HorizontalAlignment="Center" Margin="5" Grid.Row="5" TextWrapping="Wrap"
+                           Text="RUDDER" FontWeight="Bold" VerticalAlignment="Bottom"
+                           Grid.ColumnSpan="2"/>
+                <Slider Name="rudderSlider" HorizontalAlignment="Center" Margin="5" Grid.Row="6"
+                        VerticalAlignment="Top" Grid.ColumnSpan="2" Width="95"
+                        Grid.RowSpan="2" Maximum="1" Minimum="-1" IsSnapToTickEnabled="False"
+                        ValueChanged="rudderSlider_ValueChanged"
+                        />
                 <!--Joystick-->
+                <views:joystick Grid.Column="1" Grid.ColumnSpan="2"
+                                Margin="5" Grid.Row="2" Grid.RowSpan="2" MouseDown="joystick_MouseDown" MouseMove="joystick_MouseMove" MouseUp="joystick_MouseUp">
+                    <views:joystick.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.45" ScaleY="0.45"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </views:joystick.RenderTransform>
+
+                </views:joystick>
+
             </Grid>
+
         </Border>
+
     </Grid>
 
 
