@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.ViewModel
 {
-    class WheelsControlVM
+    public class WheelsControlVM
     {
+
     }
 }

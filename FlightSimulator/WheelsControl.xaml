@@ -36,7 +36,7 @@
                            Text="RUDDER" FontWeight="Bold" VerticalAlignment="Bottom"
                            Grid.ColumnSpan="2"/>
         <Slider Name="rudderSlider" HorizontalAlignment="Center" Margin="5" Grid.Row="6"
-                        VerticalAlignment="Top" Grid.ColumnSpan="2" Width="95"
+                        VerticalAlignment="Top" Grid.ColumnSpan="2" Width="120"
                         Grid.RowSpan="2" Maximum="1" Minimum="-1" IsSnapToTickEnabled="False"
                         ValueChanged="rudderSlider_ValueChanged"
                         />
