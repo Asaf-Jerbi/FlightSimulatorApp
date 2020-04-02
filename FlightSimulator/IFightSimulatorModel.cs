@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,11 +14,21 @@ namespace FlightSimulator
         void disconnect();
         void start();
 
-
         double Rudder { get; set; }
         double Elevator { get; set; }
         double Aileron { get; set; }
         double Throttle { get; set; }
+        double IndicatedHeadingDeg { get; set; }
+        double IndicatedVerticalSpeed { get; set; }
+        double IndicatedGroundSpeedKt { get; set; }
+        double IndicatedSpeedKt { get; set; }
+        double IndicatedAltitudeFt { get; set; }
+        double InternalRollDeg { get; set; }
+        double InternalPitchDeg { get; set; }
+        double AltimeterIndicatedAltitudeFt { get; set; }
+
+
+        Location Location { get; set; }
 
     }
 }

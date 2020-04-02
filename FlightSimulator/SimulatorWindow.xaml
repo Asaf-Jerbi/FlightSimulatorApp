@@ -55,7 +55,7 @@
                        FontSize="15" FontWeight="SemiBold"><Run Text="error3"/></TextBlock>
                 <Button Grid.Column="3" Grid.Row="1" Margin="10"
                         Grid.RowSpan="3" MaxWidth="150" FontWeight="Bold"
-                        Background="#FFFF2727" Click="Button_Click" BorderBrush="Black"
+                        Background="#FFFF2727" Click="Disconnect_Clicked" BorderBrush="Black"
                         BorderThickness="3" Content="Disconnect"/>
 
             </Grid>
@@ -64,7 +64,7 @@
         <m:Map x:Name="myMap" CredentialsProvider="kCJ1XBT1q5tpaOvjJsUa~JEDXylGa1P_YZ99KJ5qdPQ~Ah0_Rj2rku_BMbqcq0FBsXv3w2fzLlstrzliLkHEQLMFN5VlSN5WQolhiF8UCW3H" 
             Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" Center="32.00,34.88" ZoomLevel="12"
                Mode="AerialWithLabels" Margin="3">
-            <m:Pushpin Location ="32.00,34.88"/>
+            <m:Pushpin Location = "{Binding VM_Location}"/>
         </m:Map>
         <Border BorderBrush="Black" BorderThickness="3" 
                 Grid.Row="1" Grid.Column="2" Margin="2">
@@ -89,35 +89,35 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Margin="2"
                        FontSize="10"><Run Text="Indicated heading deg"/></TextBlock>
                 <TextBlock x:Name="headingDeg" Grid.Row="1" Grid.Column="1" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_IndicatedHeadingDeg}"></TextBlock>
                 <!--Indicated vertical speed-->
                 <TextBlock Grid.Row="2" Grid.Column="0" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated vertical speed"/></TextBlock>
                 <TextBlock x:Name="verticalSpeed" Grid.Row="2" Grid.Column="1" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_IndicatedVerticalSpeed }"></TextBlock>
                 <!--Indicated ground speed-->
                 <TextBlock Grid.Row="3" Grid.Column="0" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated ground speed"/></TextBlock>
                 <TextBlock x:Name="groundSpeed" Grid.Row="3" Grid.Column="1" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_IndicatedGroundSpeedKt}"></TextBlock>
                 <!--Indicated speed-->
                 <TextBlock Grid.Row="4" Grid.Column="0" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated speed"/></TextBlock>
                 <TextBlock x:Name="speed" Grid.Row="4" Grid.Column="1" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_IndicatedSpeedKt }"></TextBlock>
                 <!--Gps Altitude-->
-                <TextBlock Grid.Row="1" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated speed"/></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Indicated altitude"/></TextBlock>
                 <TextBlock x:Name="gpsAltitude" Grid.Row="1" Grid.Column="3" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_IndicatedAltitudeFt}"></TextBlock>
                 <!--Gps Altitude-->
                 <TextBlock Grid.Row="2" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Inernal roll"/></TextBlock>
                 <TextBlock x:Name="internalRoll" Grid.Row="2" Grid.Column="3" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_InternalRollDeg}"></TextBlock>
                 <!--Internal Roll-->
                 <TextBlock Grid.Row="3" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Inernal pitch"/></TextBlock>
                 <TextBlock x:Name="internalPitch" Grid.Row="3" Grid.Column="3" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_InternalPitchDeg}"></TextBlock>
                 <!--Gps Altitude-->
                 <TextBlock Grid.Row="4" Grid.Column="2" FontWeight="Bold" Margin="2" FontSize="10"><Run Text="Altimeter altitude"/></TextBlock>
                 <TextBlock x:Name="altimeterAltitude" Grid.Row="4" Grid.Column="3" FontWeight="SemiBold"
-                       HorizontalAlignment="Left" Margin="2"><Run Text="0"/></TextBlock>
+                       HorizontalAlignment="Left" Margin="2" Text="{Binding VM_AltimeterIndicatedAltitudeFt}"></TextBlock>
             </Grid>
         </Border>
         <!--Controls-->

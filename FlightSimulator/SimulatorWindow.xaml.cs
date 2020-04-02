@@ -1,16 +1,6 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace FlightSimulator
@@ -20,17 +10,21 @@ namespace FlightSimulator
     /// </summary>
     public partial class SimulatorWindow : Window
     {
+
         private bool mousePressed;
         private double x, y, x1, y1;
+
         public SimulatorWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Disconnect_Clicked(object sender, RoutedEventArgs e)
         {
 
         }
+
+
         /*
          * Mouse press down event handeler
          */
@@ -45,6 +39,8 @@ namespace FlightSimulator
             Console.WriteLine(x + "," + y);
             mousePressed = true;
         }
+
+
         /*
          * Mouse movment event handeler
          */
@@ -59,6 +55,8 @@ namespace FlightSimulator
             }
 
         }
+
+
         /*
          * Mouse release event handeler
          */
@@ -68,6 +66,7 @@ namespace FlightSimulator
             Console.WriteLine("Mouse up");
         }
 
+
         /*
 * Helpin methos to calculate mouse movement length
 */
@@ -75,6 +74,7 @@ namespace FlightSimulator
         {
             return Math.Sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
         }
+
         /*
          * rudder slider change event handeler
          */
@@ -83,6 +83,7 @@ namespace FlightSimulator
             double x = rudderSlider.Value;
             Console.WriteLine(x);
         }
+
         /*
          * throttle slider change event handeler
          */
