@@ -55,7 +55,7 @@
                        FontSize="15" FontWeight="SemiBold"><Run Text="error3"/></TextBlock>
                 <Button Grid.Column="3" Grid.Row="1" Margin="10"
                         Grid.RowSpan="3" MaxWidth="150" FontWeight="Bold"
-                        Background="#FFFF2727" Click="Disconnect_Clicked" BorderBrush="Black"
+                        Background="#FFFF2727" BorderBrush="Black"
                         BorderThickness="3" Content="Disconnect"/>
 
             </Grid>
@@ -125,7 +125,7 @@
         <Border BorderBrush="Black" BorderThickness="3" 
                 Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3">
             <local:WheelsControl>
-
+            
             </local:WheelsControl>
         </Border>
 

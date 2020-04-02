@@ -8,7 +8,7 @@ namespace FlightSimulator
     class FlightSimulatorModel : IFightSimulatorModel
     {
         //Fields
-        public event PropertyChangedEventHandler PropertyChanged; 
+        public event PropertyChangedEventHandler PropertyChanged;
         ITelnetClient telnetClient;
         volatile Boolean stop;
         private Location location;
@@ -44,14 +44,14 @@ namespace FlightSimulator
                 while (true)
                 {
                     // get all dashboard data
-                    IndicatedHeadingDeg = Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg \r\n"));
-                    IndicatedVerticalSpeed = Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed \r\n"));
-                    IndicatedGroundSpeedKt = Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt \r\n"));
-                    IndicatedSpeedKt = Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt \r\n"));
-                    IndicatedAltitudeFt = Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft \r\n"));
-                    InternalRollDeg = Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg \r\n"));
-                    InternalPitchDeg = Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg \r\n"));
-                    AltimeterIndicatedAltitudeFt = Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft \r\n"));
+                    IndicatedHeadingDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg \r\n")), 3);
+                    IndicatedVerticalSpeed = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed \r\n")), 3);
+                    IndicatedGroundSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt \r\n")), 3);
+                    IndicatedSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt \r\n")), 3);
+                    IndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft \r\n")), 3);
+                    InternalRollDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg \r\n")), 3);
+                    InternalPitchDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg \r\n")), 3);
+                    AltimeterIndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft \r\n")), 3);
                     // get longtitude
                     double longtitude = double.Parse(this.telnetClient.read("get /position/longitude-deg\n"));
                     // get altitude
