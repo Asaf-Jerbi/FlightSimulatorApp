@@ -15,7 +15,8 @@ namespace FlightSimulator
 
         public SimulatorWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
         }
 
 
