@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FlightSimulator" xmlns:views="clr-namespace:FlightSimulator.views"
+             xmlns:local="clr-namespace:FlightSimulator.views" xmlns:views="clr-namespace:FlightSimulator.views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
@@ -30,7 +30,8 @@
                         VerticalAlignment="Top" Height="95" Grid.Column="0"
                         Grid.ColumnSpan="2" Maximum="1" Minimum="0"
                         Grid.RowSpan="3" Width="14" Orientation="Vertical"
-                        IsSnapToTickEnabled="False" ValueChanged="throttleSlider_ValueChanged"/>
+                        IsSnapToTickEnabled="False" ValueChanged="throttleSlider_ValueChanged"
+                TickFrequency="10"/>
         <!--Rudder slider-->
         <TextBlock HorizontalAlignment="Center" Margin="5" Grid.Row="5" TextWrapping="Wrap"
                            Text="RUDDER" FontWeight="Bold" VerticalAlignment="Bottom"
@@ -52,5 +53,9 @@
                 </TransformGroup>
             </views:joystick.RenderTransform>
         </views:joystick>
+        <!--Text block-->
+        <TextBlock Grid.Column="3" Grid.Row="1">
+            
+        </TextBlock>
     </Grid>
 </UserControl>

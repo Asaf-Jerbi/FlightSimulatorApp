@@ -23,6 +23,7 @@ namespace FlightSimulator
         public WheelsControl()
         {
             InitializeComponent();
+            this.DataContext = new ViewModel.WheelsControlVM();
         }
         private void rudderSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {

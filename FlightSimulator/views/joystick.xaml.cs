@@ -27,6 +27,17 @@ namespace FlightSimulator.views
             InitializeComponent();
         }
 
+        public double xValue
+        {
+            get => knobPosition.X;
+            set { }
+        }
+        public double yValue
+        {
+            get => knobPosition.Y;
+            set { }
+        }
+
         private void centerKnob_Completed(object sender, EventArgs e) { }
         private Point firstPoint = new Point();
         //double x1, y1, x2, y2;

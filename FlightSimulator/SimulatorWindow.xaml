@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ELAL.png"/>
+            <ImageBrush ImageSource="Pictures\ELAL.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -60,14 +60,13 @@
 
             </Grid>
         </Border>
-
-        <m:Map x:Name="myMap" CredentialsProvider="kCJ1XBT1q5tpaOvjJsUa~JEDXylGa1P_YZ99KJ5qdPQ~Ah0_Rj2rku_BMbqcq0FBsXv3w2fzLlstrzliLkHEQLMFN5VlSN5WQolhiF8UCW3H" 
-            Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" Center="32.00,34.88" ZoomLevel="12"
-               Mode="AerialWithLabels" Margin="3">
-
-            <m:Pushpin Location ="32.00,34.88"/>
-
-        </m:Map>
+        <!--Map-->
+        <Border Grid.Row="2" Grid.Column="1" Grid.RowSpan="3">
+            <views:MapView x:Name="myMap">
+                
+            </views:MapView>
+        </Border>
+        <!--DashBoard-->
         <Border BorderBrush="Black" BorderThickness="3" 
                 Grid.Row="1" Grid.Column="2" Margin="2">
 
@@ -124,8 +123,8 @@
         </Border>
         <!--Controls-->
         <Border BorderBrush="Black" BorderThickness="3" 
-                Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3">
-            <local:WheelsControl>
+                Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3" DataContext="WheelsControlVM">
+            <local:WheelsControl x:Name="wheelsControl">
 
             </local:WheelsControl>
         </Border>

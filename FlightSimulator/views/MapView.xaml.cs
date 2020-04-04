@@ -1,6 +1,4 @@
-﻿using FlightSimulator.ViewModel;
-using Microsoft.Maps.MapControl.WPF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FlightSimulator
+namespace FlightSimulator.views
 {
     /// <summary>
-    /// Interaction logic for SimulatorWindow.xaml
+    /// Interaction logic for MapView.xaml
     /// </summary>
-    public partial class SimulatorWindow : Window
+    public partial class MapView : UserControl
     {
-        public SimulatorWindow()
+        public MapView()
         {
             InitializeComponent();
-            WheelsControlVM wcVM = new WheelsControlVM();
-            wheelsControl.DataContext = wcVM;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

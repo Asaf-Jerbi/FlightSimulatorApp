@@ -111,11 +111,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FlightSimulatorModel.cs" />
-    <Compile Include="FlightSimulatorViewModel.cs" />
-    <Compile Include="IFightSimulatorModel.cs" />
-    <Compile Include="ITelnetClient.cs" />
-    <Compile Include="MyTelnetClient.cs" />
+    <Compile Include="Model\FlightSimulatorModel.cs" />
+    <Compile Include="ViewModel\FlightSimulatorViewModel.cs" />
+    <Compile Include="Model\IFightSimulatorModel.cs" />
+    <Compile Include="Model\ITelnetClient.cs" />
+    <Compile Include="Model\MyTelnetClient.cs" />
     <Compile Include="SimulatorWindow.xaml.cs">
       <DependentUpon>SimulatorWindow.xaml</DependentUpon>
     </Compile>
@@ -123,7 +123,10 @@
     <Compile Include="views\joystick.xaml.cs">
       <DependentUpon>joystick.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WheelsControl.xaml.cs">
+    <Compile Include="views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\WheelsControl.xaml.cs">
       <DependentUpon>WheelsControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -146,7 +149,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WheelsControl.xaml">
+    <Page Include="views\MapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\WheelsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,19 +186,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="airplane.png" />
+    <Resource Include="Pictures\airplane.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ELAL.png" />
+    <Resource Include="Pictures\ELAL.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="IsraelAirPlan.png" />
+    <Resource Include="Pictures\IsraelAirPlan.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
