@@ -146,7 +146,7 @@ namespace FlightSimulator.views
             element.ReleaseMouseCapture();
             //mousePressed = false;
         }
-
+        
         private void Knob_MouseLeave(object sender, MouseEventArgs e)
         {
             knobPosition.X = 0;
