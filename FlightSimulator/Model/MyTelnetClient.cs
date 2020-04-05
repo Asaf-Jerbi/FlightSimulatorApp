@@ -45,7 +45,7 @@ namespace FlightSimulator
             string data = "";
             try
             {
-                //mutex.WaitOne();
+                mutex.WaitOne();
                 byte[] write = Encoding.ASCII.GetBytes(command);
                 //write to server 
                 client.GetStream().Write(write, 0, write.Length);
@@ -57,7 +57,7 @@ namespace FlightSimulator
                 data = Encoding.ASCII.GetString(read, 0, read.Length);
                 //Console.WriteLine("server response of reading data is: {0}\n",Double.Parse(data));
                 return data;
-                //mutex.ReleaseMutex();
+                mutex.ReleaseMutex();
             }
             catch (Exception exception)
             {
@@ -76,7 +76,7 @@ namespace FlightSimulator
         {
             try
             {
-                //mutex.WaitOne();
+                mutex.WaitOne();
                 byte[] write = Encoding.ASCII.GetBytes(command);
                 //write to server 
                 client.GetStream().Write(write, 0, write.Length);
@@ -87,7 +87,7 @@ namespace FlightSimulator
                 
                 string data = Encoding.ASCII.GetString(read, 0, read.Length);
                 Console.WriteLine("server response after writing: {0}", data);
-                //mutex.ReleaseMutex();
+                mutex.ReleaseMutex();
             }
             catch (Exception exception)
             {
