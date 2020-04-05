@@ -20,24 +20,37 @@ namespace FlightSimulator.views
     /// </summary>
     public partial class joystick : UserControl
     {
-        private bool mousePressed;
-        Point knobCenter;
+        //private bool mousePressed;
+        //Point knobCenter;
         public joystick()
         {
             InitializeComponent();
         }
+        
+        //public double normalizedX { get; set; }
+        //public double normalizedY // elevator
+        //{
+        //    get; set;
+        //}
 
-        public double xValue
+        public static readonly DependencyProperty rudderProperty =
+         DependencyProperty.Register("rudder", typeof(double),typeof(joystick));
+        public double rudder
         {
-            get => knobPosition.X;
-            set { }
+            get { return (double)GetValue(rudderProperty); }
+            set { SetValue(rudderProperty, value);
+            }
         }
-        public double yValue
+        public static readonly DependencyProperty elevatorProperty =
+         DependencyProperty.Register("elevator", typeof(double), typeof(joystick));
+        public double elevator
         {
-            get => knobPosition.Y;
-            set { }
-        }
-
+            get { return (double)GetValue(elevatorProperty); }
+            set
+            {
+                SetValue(elevatorProperty, value);
+            }
+        }   
         private void centerKnob_Completed(object sender, EventArgs e) { }
         private Point firstPoint = new Point();
         //double x1, y1, x2, y2;
@@ -52,10 +65,10 @@ namespace FlightSimulator.views
             }
         }
 
-
+        
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            double slope ,absX, absY, normalizedX, normalizedY;
+            double slope ,absX, absY;
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 //calculating lineare quation to find points at radius distance from base if mouse go out.
@@ -127,8 +140,9 @@ namespace FlightSimulator.views
                     knobPosition.Y = y;
                 }
             }
-            normalizedX = knobPosition.X / 170;
-            normalizedY = knobPosition.Y / 170;
+            //normalize our values to [-1,1] range
+            rudder = knobPosition.X / 170;
+            elevator = knobPosition.Y / -170;
         }
 
         /*

@@ -20,16 +20,18 @@ namespace FlightSimulator
     /// </summary>
     public partial class WheelsControl : UserControl
     {
+        private double aileron;
+        private double throttle;
         public WheelsControl()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.WheelsControlVM();
+            //this.DataContext = new ViewModel.WheelsControlVM();
         }
-        private void rudderSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void aileronSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            double x = rudderSlider.Value;
+            double x = aileronSlider.Value;
             Console.WriteLine(x);
-            Console.WriteLine(joystick.knobPosition.X);
+            aileronValText.Text = Math.Round(x, 3).ToString();
         }
         /*
          * throttle slider change event handeler
@@ -37,6 +39,7 @@ namespace FlightSimulator
         private void throttleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double x = throttleSlider.Value;
+            throttleValText.Text = Math.Round(x,3).ToString();
             Console.WriteLine(x);
         }
     }

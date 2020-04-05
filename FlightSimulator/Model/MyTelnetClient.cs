@@ -17,8 +17,14 @@ namespace FlightSimulator
             Console.WriteLine("Establishing connection to ip: {0} by port: {1}", ip, port);
             //socket.Connect(ip, port);            
             client = new TcpClient();
-            client.Connect(ip, port);
-            Console.WriteLine("Connection established");
+            try
+            {
+                client.Connect(ip, port);
+                Console.WriteLine("Connection established");
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             //networkStream = new NetworkStream(socket);
         }
 

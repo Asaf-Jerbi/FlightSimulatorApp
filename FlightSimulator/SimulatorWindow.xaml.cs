@@ -12,16 +12,11 @@ namespace FlightSimulator
     /// </summary>
     public partial class SimulatorWindow : Window
     {
-
-        private bool mousePressed;
-
         public SimulatorWindow()
         {
             InitializeComponent();
-            WheelsControlVM wcVM = new WheelsControlVM();
-            wheelsControl.DataContext = wcVM;
-        }
-
+            //WheelsControlVM wcVM = new WheelsControlVM();
+            //wheelsControl.DataContext = wcVM;
         }
     }
 }

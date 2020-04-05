@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.ComponentModel;
+using System.Text;
 using System.Threading;
 
 namespace FlightSimulator
@@ -191,8 +192,32 @@ namespace FlightSimulator
                 }
             }
         }
+        /// <summary>
+        /// this method make a set command to sent to the server
+        /// </summary>
+        /// <param name="paramName"> the parameter name</param>
+        /// <param name="value">the parameter value</param>
+        public void set(string paramName, double value)
+        {
+            //its null but will be initialized.
+            string command = null;
+            if(paramName.Equals("throttle"))
+            {
+                command = "set /controls/engines/current-engine/throttle " + value;
+            } else if (paramName.Equals("aileron"))
+            {
+                command = "set /controls/flight/aileron " + value;
+            }
+            else if (paramName.Equals("elevator"))
+            {
+                command = "set /controls/flight/elevator " + value;
+            }
+            else if (paramName.Equals("rudder"))
+            {
+                command = "set /controls/flight/rudder " + value;
+            }
+            telnetClient.write(command);
 
-
-
+        }
     }
 }

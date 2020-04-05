@@ -23,27 +23,30 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <!--Throttle slider-->
-        <TextBlock HorizontalAlignment="Center" Margin="2" Grid.Row="1" TextWrapping="Wrap"
-                           Text="THROTTLE" FontWeight="Bold" VerticalAlignment="Bottom"
+        <TextBlock HorizontalAlignment="Center" Margin="2" Grid.Row="0" TextWrapping="Wrap"
+                           Text="Throttle" FontWeight="Bold" VerticalAlignment="Bottom"
                            Grid.ColumnSpan="2"/>
-        <Slider Name="throttleSlider" HorizontalAlignment="Center" Margin="2" Grid.Row="2"
-                        VerticalAlignment="Top" Height="95" Grid.Column="0"
-                        Grid.ColumnSpan="2" Maximum="1" Minimum="0"
-                        Grid.RowSpan="3" Width="14" Orientation="Vertical"
-                        IsSnapToTickEnabled="False" ValueChanged="throttleSlider_ValueChanged"
-                TickFrequency="10"/>
-        <!--Rudder slider-->
+        <TextBlock x:Name="throttleValText" HorizontalAlignment="Center" Margin="2" Grid.Row="1" TextWrapping="Wrap"
+                           Text="0" FontWeight="Bold" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Slider Name="throttleSlider" HorizontalAlignment="Center" Margin="3" Grid.Row="2"
+                        VerticalAlignment="Top" Height="100" Grid.Column="0"
+                        Grid.ColumnSpan="2" Maximum="1" Minimum="0" TickFrequency="0.1" TickPlacement="Both"
+                        Grid.RowSpan="3" Width="14" Orientation="Vertical" ValueChanged="throttleSlider_ValueChanged"
+                        Value="{Binding VM_throttle, Mode=OneWayToSource}"/>
+        <!--aileron slider-->
         <TextBlock HorizontalAlignment="Center" Margin="5" Grid.Row="5" TextWrapping="Wrap"
-                           Text="RUDDER" FontWeight="Bold" VerticalAlignment="Bottom"
-                           Grid.ColumnSpan="2"/>
-        <Slider Name="rudderSlider" HorizontalAlignment="Center" Margin="5" Grid.Row="6"
-                        VerticalAlignment="Top" Grid.ColumnSpan="2" Width="120"
-                        Grid.RowSpan="2" Maximum="1" Minimum="-1" IsSnapToTickEnabled="False"
-                        ValueChanged="rudderSlider_ValueChanged"
-                        />
+                           Text="Aileron" FontWeight="Bold" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="aileronValText" HorizontalAlignment="Center" Margin="5" Grid.Row="5" TextWrapping="Wrap"
+                           Text="0" FontWeight="Bold" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <Slider Name="aileronSlider" HorizontalAlignment="Center" Margin="5" Grid.Row="6"
+                        VerticalAlignment="Top" Grid.ColumnSpan="2" Width="150"
+                        Grid.RowSpan="2" Maximum="1" Minimum="-1" TickFrequency="0.2" TickPlacement="TopLeft"
+                        ValueChanged="aileronSlider_ValueChanged"
+                        Value="{Binding VM_aileron, Mode=OneWayToSource}"/>
         <!--Joystick-->
         <views:joystick x:Name="joystick" Grid.Column="1" Grid.ColumnSpan="2"
-                                Margin="5" Grid.Row="2" Grid.RowSpan="2">
+                                Margin="5" Grid.Row="2" Grid.RowSpan="2" rudder="{Binding Path=VM_rudder, Mode=OneWayToSource}"
+                        elevator="{Binding Path=VM_elevator, Mode=OneWayToSource}">
             <views:joystick.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.45" ScaleY="0.45"/>
@@ -53,9 +56,17 @@
                 </TransformGroup>
             </views:joystick.RenderTransform>
         </views:joystick>
-        <!--Text block-->
-        <TextBlock Grid.Column="3" Grid.Row="1">
-            
-        </TextBlock>
+        <!--rudder text block-->
+        <TextBlock x:Name="rudderText" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Left" Text="rudder" FontWeight="Bold"
+                   VerticalAlignment="Top"></TextBlock>
+        <TextBlock x:Name="rudderTextValue" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Right"
+                   Text="{Binding Path=VM_rudder, Mode=OneWay}" FontWeight="Bold"
+                   VerticalAlignment="Top"></TextBlock>
+        <!--elevator text block-->
+        <TextBlock x:Name="aileronText" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Left" Text="Aileron" FontWeight="Bold"
+                   VerticalAlignment="Bottom"></TextBlock>
+        <TextBlock x:Name="aileronTextValue" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Right" 
+                   Text="{Binding Path=VM_elevator, Mode=OneWay}" FontWeight="Bold"
+                   VerticalAlignment="Bottom"></TextBlock>
     </Grid>
 </UserControl>
