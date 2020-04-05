@@ -45,14 +45,14 @@ namespace FlightSimulator
                 while (true)
                 {
                     // get all dashboard data
-                    IndicatedHeadingDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg \r\n")), 3);
-                    IndicatedVerticalSpeed = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed \r\n")), 3);
-                    IndicatedGroundSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt \r\n")), 3);
-                    IndicatedSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt \r\n")), 3);
-                    IndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft \r\n")), 3);
-                    InternalRollDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg \r\n")), 3);
-                    InternalPitchDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg \r\n")), 3);
-                    AltimeterIndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft \r\n")), 3);
+                    IndicatedHeadingDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg\n")), 3);
+                    IndicatedVerticalSpeed = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed\n")), 3);
+                    IndicatedGroundSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt\n")), 3);
+                    IndicatedSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt\n")), 3);
+                    IndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft\n")), 3);
+                    InternalRollDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg\n")), 3);
+                    InternalPitchDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg\n")), 3);
+                    AltimeterIndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft\n")), 3);
                     // get longtitude
                     double longtitude = double.Parse(this.telnetClient.read("get /position/longitude-deg\n"));
                     // get altitude
@@ -203,18 +203,18 @@ namespace FlightSimulator
             string command = null;
             if(paramName.Equals("throttle"))
             {
-                command = "set /controls/engines/current-engine/throttle " + value;
+                command = "set /controls/engines/current-engine/throttle " + value + "\n";
             } else if (paramName.Equals("aileron"))
             {
-                command = "set /controls/flight/aileron " + value;
+                command = "set /controls/flight/aileron " + value + "\n";
             }
             else if (paramName.Equals("elevator"))
             {
-                command = "set /controls/flight/elevator " + value;
+                command = "set /controls/flight/elevator " + value + "\n";
             }
             else if (paramName.Equals("rudder"))
             {
-                command = "set /controls/flight/rudder " + value;
+                command = "set /controls/flight/rudder " + value + "\n";
             }
             telnetClient.write(command);
 

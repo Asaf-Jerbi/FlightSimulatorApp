@@ -30,7 +30,7 @@ namespace FlightSimulator.ViewModel
                 {
                     this.rudder = Math.Round(value, 3);
                     Console.WriteLine("rudder = "+value);
-                    //model.set("rudder", value);
+                    model.set("rudder", value);
                     
                 }
             }
@@ -44,7 +44,7 @@ namespace FlightSimulator.ViewModel
                 if (this.elevator != value)
                 {
                     this.elevator = Math.Round(value,3);
-                    //model.set("elevator", value);
+                    model.set("elevator", value);
                 }
             }
         }
@@ -53,14 +53,14 @@ namespace FlightSimulator.ViewModel
         {
             get { return this.aileron; }
             set { this.aileron = value;
-                //model.set("aileron", value);
+                model.set("aileron", value);
             }
         }
         public double VM_throttle
         {
             get { return this.throttle; }
             set { this.throttle = value;
-                //model.set("throttle", value);
+                model.set("throttle", value);
             }
         }
     }

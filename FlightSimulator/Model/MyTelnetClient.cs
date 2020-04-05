@@ -27,13 +27,11 @@ namespace FlightSimulator
             }
             //networkStream = new NetworkStream(socket);
         }
-
         public void disconnect()
         {
             client.Client.Close();
             Console.WriteLine("Disconnecting server");
         }
-
         /// <summary>
         /// Reads from server 
         /// </summary>
@@ -55,9 +53,10 @@ namespace FlightSimulator
                 client.GetStream().Read(read, 0, 1024);
 
                 data = Encoding.ASCII.GetString(read, 0, read.Length);
+
+                mutex.ReleaseMutex();
                 //Console.WriteLine("server response of reading data is: {0}\n",Double.Parse(data));
                 return data;
-                mutex.ReleaseMutex();
             }
             catch (Exception exception)
             {
@@ -66,7 +65,6 @@ namespace FlightSimulator
                 return data;
             }
         }
-
         /// <summary>
         /// Writes to server and reading the response so the reading will be 'pure' 
         /// and the response won't affect other processes that reads from the server 
