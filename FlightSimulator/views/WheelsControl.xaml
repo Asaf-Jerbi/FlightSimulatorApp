@@ -44,6 +44,7 @@
                         ValueChanged="aileronSlider_ValueChanged"
                         Value="{Binding VM_aileron, Mode=OneWayToSource}"/>
         <!--Joystick-->
+
         <views:joystick x:Name="joystick" Grid.Column="1" Grid.ColumnSpan="2"
                                 Margin="5" Grid.Row="2" Grid.RowSpan="2" rudder="{Binding Path=VM_rudder, Mode=OneWayToSource}"
                         elevator="{Binding Path=VM_elevator, Mode=OneWayToSource}">

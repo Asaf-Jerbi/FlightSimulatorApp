@@ -87,6 +87,14 @@ namespace FlightSimulator
             set
             {
                 this.location = value;
+                //keeping in the right range.
+                if(value.Latitude > 85)
+                {
+                    location.Latitude = 85;
+                } else if (value.Latitude < -85)
+                {
+                    location.Latitude = -85;
+                }
                 NotifyPropertyChanged("Location");
             }
         }

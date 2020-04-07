@@ -36,6 +36,7 @@ namespace FlightSimulator
                 this.Visibility = Visibility.Hidden;
                 objSimulator.DataContext = fs_ViewModel;
                 objSimulator.Show();
+                this.Close();
             }
             catch (Exception exception)
             {

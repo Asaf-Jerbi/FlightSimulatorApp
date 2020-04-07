@@ -116,6 +116,7 @@
     <Compile Include="SimulatorWindow.xaml.cs">
       <DependentUpon>SimulatorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\MapVM.cs" />
     <Compile Include="ViewModel\WheelsControlVM.cs" />
     <Compile Include="views\joystick.xaml.cs">
       <DependentUpon>joystick.xaml</DependentUpon>
