@@ -1,7 +1,7 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.ComponentModel;
-
+using System.Configuration;
 
 namespace FlightSimulator
 {
@@ -34,7 +34,17 @@ namespace FlightSimulator
         /// </summary>
         public void connect()
         {
-            this.model.connect(Ip, Port);
+            try
+            {
+                this.model.connect(Ip, Port);
+            }
+            catch (Exception e)
+            {
+                //If cannot login with the iserterd ip, port than try to connect with 
+                int defaultPort = Int32.Parse(ConfigurationManager.AppSettings["port"].ToString());
+                string defaultIP = ConfigurationManager.AppSettings["ip"].ToString();
+                this.model.connect(defaultIP, defaultPort);
+            }
             this.model.start();
         }
 

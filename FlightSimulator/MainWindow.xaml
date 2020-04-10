@@ -55,7 +55,7 @@
         <Button x:Name="ExitButton" Content="Exit" Grid.Row="5" Grid.Column="4" 
                 Margin="10" MaxHeight="50" MaxWidth="150" Background="red"
                 FontWeight="Bold" Click="connectButton_Click"/>
-        <TextBlock x:Name="errorLabel" Text="Error one or more connection details are wrong" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Width="436"
+        <TextBlock x:Name="errorLabel" Text="Couldn't connect to server" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Width="436"
                Visibility="Hidden" FontSize="20" FontWeight="SemiBold" Foreground="#FFF50707" />
     </Grid>
 </Window>
