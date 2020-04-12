@@ -88,16 +88,38 @@ namespace FlightSimulator
             {
                 this.location = value;
                 //keeping in the right range.
-                if(value.Latitude > 85)
+                if(value.Latitude > 90)
                 {
-                    location.Latitude = 85;
-                } else if (value.Latitude < -85)
+                    location.Latitude = 90;
+                    PlaneOutOfMap = true;
+                } else if (value.Latitude < -90)
                 {
-                    location.Latitude = -85;
+                    location.Latitude = -90;
+                    PlaneOutOfMap = true;
+                }
+                else
+                {
+                    PlaneOutOfMap = false;
+                }
+                if (value.Longitude > 180)
+                {
+                    location.Longitude = 180;
+                    PlaneOutOfMap = true;
+                }
+                else if (value.Longitude < -180)
+                {
+                    location.Longitude = -180;
+                    PlaneOutOfMap = true;
+                } else
+                {
+                    PlaneOutOfMap = false;
                 }
                 NotifyPropertyChanged("Location");
             }
         }
+        public bool PlaneOutOfMap {
+            get { return this.PlaneOutOfMap; }
+            set { NotifyPropertyChanged("PlaneOutOfMap"); } }
 
         public double IndicatedHeadingDeg
         {

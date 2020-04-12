@@ -64,9 +64,9 @@
                    Text="{Binding Path=VM_rudder, Mode=OneWay}" FontWeight="Bold"
                    VerticalAlignment="Top"></TextBlock>
         <!--elevator text block-->
-        <TextBlock x:Name="aileronText" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Left" Text="Aileron" FontWeight="Bold"
+        <TextBlock x:Name="elevatorText" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Left" Text="Elevator" FontWeight="Bold"
                    VerticalAlignment="Bottom"></TextBlock>
-        <TextBlock x:Name="aileronTextValue" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Right" 
+        <TextBlock x:Name="elevatorTextValue" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Right" 
                    Text="{Binding Path=VM_elevator, Mode=OneWay}" FontWeight="Bold"
                    VerticalAlignment="Bottom"></TextBlock>
     </Grid>

@@ -29,7 +29,7 @@ namespace FlightSimulator.ViewModel
                 if (this.rudder != value)
                 {
                     this.rudder = Math.Round(value, 3);
-                    Console.WriteLine("rudder = "+value);
+                    //Console.WriteLine("rudder = "+value);
                     model.set("rudder", value);
                     
                 }

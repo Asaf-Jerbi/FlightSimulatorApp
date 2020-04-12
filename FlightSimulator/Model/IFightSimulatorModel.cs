@@ -27,6 +27,7 @@ namespace FlightSimulator
         double InternalRollDeg { get; set; }
         double InternalPitchDeg { get; set; }
         double AltimeterIndicatedAltitudeFt { get; set; }
+        bool PlaneOutOfMap { get; set; }
 
 
         Location Location { get; set; }

@@ -30,7 +30,7 @@ namespace FlightSimulator
         private void aileronSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double x = aileronSlider.Value;
-            Console.WriteLine(x);
+            //Console.WriteLine(x);
             aileronValText.Text = Math.Round(x, 3).ToString();
         }
         /*
@@ -40,7 +40,7 @@ namespace FlightSimulator
         {
             double x = throttleSlider.Value;
             throttleValText.Text = Math.Round(x,3).ToString();
-            Console.WriteLine(x);
+            //Console.WriteLine(x);
         }
     }
 }

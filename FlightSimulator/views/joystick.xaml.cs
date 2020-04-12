@@ -74,7 +74,6 @@ namespace FlightSimulator.views
                 //calculating lineare quation to find points at radius distance from base if mouse go out.
                 double x = e.GetPosition(this).X - firstPoint.X;
                 double y = e.GetPosition(this).Y - firstPoint.Y;
-                //Console.WriteLine(x + "," + y);
                 if (Math.Sqrt(x * x + y * y) > Base.Width / 2)
                 {
                     if (x == 0)

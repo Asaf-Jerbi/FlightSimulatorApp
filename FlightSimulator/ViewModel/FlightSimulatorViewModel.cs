@@ -26,6 +26,7 @@ namespace FlightSimulator
                 {
                     NotifyPropertyChanged("VM_" + e.PropertyName);
                 };
+            VM_PlaneOutOfMap = false;
         }
 
 
@@ -127,5 +128,6 @@ namespace FlightSimulator
             get { return this.model.AltimeterIndicatedAltitudeFt; }
             set { }
         }
+        public bool VM_PlaneOutOfMap{ get { return this.model.PlaneOutOfMap; } set { } }
     }
 }
