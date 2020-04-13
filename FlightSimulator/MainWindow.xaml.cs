@@ -1,5 +1,6 @@
 ﻿using FlightSimulator.ViewModel;
 using System;
+using System.Configuration;
 using System.Windows;
 
 
@@ -14,27 +15,30 @@ namespace FlightSimulator
         FlightSimulatorViewModel fs_ViewModel;
         private IFightSimulatorModel model;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             this.model = new FlightSimulatorModel(new MyTelnetClient());
             fs_ViewModel = new FlightSimulatorViewModel(this.model);
-            DataContext = fs_ViewModel; //here for binding the ip, port, etc
-
-            
+            DataContext = fs_ViewModel; //here for binding the ip, port, etc            
         }
+       
         /// <summary>
-        /// The logic after clicking the connect button
+        /// Connecting to server after "Connect" button is clicked.
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void connectButton_Click(object sender, RoutedEventArgs e)
-        {            
+        {       
             try
             {
                 //connect to server   
-                this.fs_ViewModel.connect(); 
+                this.fs_ViewModel.connect();
                 //open simulator window
-                SimulatorWindow objSimulator = new SimulatorWindow();
-                //Matching data context to Wheels contor VM and the whhels control view.
+                SimulatorWindow objSimulator = new SimulatorWindow(model);
                 objSimulator.wheelsControl.DataContext = new WheelsControlVM(this.model);
                 this.Visibility = Visibility.Hidden;
                 //matching data context to VM
@@ -46,6 +50,17 @@ namespace FlightSimulator
             {
                 this.errorLabel.Visibility = Visibility.Visible;
             }
+        }
+
+        /// <summary>
+        /// Terminates the program when the "Exit" burron is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            //terminate the whole program 
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

@@ -4,33 +4,36 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FlightSimulator
 {
-    interface IFightSimulatorModel : INotifyPropertyChanged
+    public interface IFightSimulatorModel : INotifyPropertyChanged
     {
+        // Methods.
         void connect(string ip, int port);
         void disconnect();
         void start();
         void set(string varName,double value);
 
-        double Rudder { get; set; }
-        double Elevator { get; set; }
-        double Aileron { get; set; }
-        double Throttle { get; set; }
-        double IndicatedHeadingDeg { get; set; }
-        double IndicatedVerticalSpeed { get; set; }
-        double IndicatedGroundSpeedKt { get; set; }
-        double IndicatedSpeedKt { get; set; }
-        double IndicatedAltitudeFt { get; set; }
-        double InternalRollDeg { get; set; }
-        double InternalPitchDeg { get; set; }
-        double AltimeterIndicatedAltitudeFt { get; set; }
-        string PlaneOutOfMap { get; set; }
-
-
+        // Properties:
+        string Rudder { get; set; }
+        string Elevator { get; set; }
+        string Aileron { get; set; }
+        string Throttle { get; set; }
+        string IndicatedHeadingDeg { get; set; }
+        string IndicatedVerticalSpeed { get; set; }
+        string IndicatedGroundSpeedKt { get; set; }
+        string IndicatedSpeedKt { get; set; }
+        string IndicatedAltitudeFt { get; set; }
+        string InternalRollDeg { get; set; }
+        string InternalPitchDeg { get; set; }
+        string AltimeterIndicatedAltitudeFt { get; set; }       
         Location Location { get; set; }
+        string Slowness { get; set; }
+        Thread StartThread { get; }
+        string PlaneOutOfMap { get; set; }
 
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading;
 
@@ -8,82 +10,145 @@ namespace FlightSimulator
 {
     class FlightSimulatorModel : IFightSimulatorModel
     {
-        //Fields
+        // Fields.
         public event PropertyChangedEventHandler PropertyChanged;
         ITelnetClient telnetClient;
-        volatile Boolean stop;
         private Location location;
-        private double indicatedHeadingDeg;
-        private double indicatedVerticalSpeed;
-        private double indicatedGroundSpeedKt;
-        private double indicatedSpeedKt;
-        private double indicatedAltitudeFt;
-        private double internalRollDeg;
-        private double internalPitchDeg;
-        private double altimeterIndicatedAltitudeFt;
+        private Thread srartThread;
+
+        // Dashboard values.       
+        private string indicatedHeadingDeg;
+        private string indicatedVerticalSpeed;
+        private string indicatedGroundSpeedKt;
+        private string indicatedSpeedKt;
+        private string indicatedAltitudeFt;
+        private string internalRollDeg;
+        private string internalPitchDeg;
+        private string altimeterIndicatedAltitudeFt;
         private string planeOutOfMap;
-        private bool outOfMap;
+
+        // UI errors values.
+        private string slowness;
+
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="telnetClient">telnet client to connect with to server</param>
-        public FlightSimulatorModel(ITelnetClient telnetClient)
+        /// <param name="telnetClient">telnet client to connect with to server</param>        public FlightSimulatorModel(ITelnetClient telnetClient)
         {
             this.telnetClient = telnetClient;
-            this.stop = false;
-            this.outOfMap = false;
         }
 
 
+        /// <summary>
+        /// Connect method.
+        /// </summary>
+        /// <param name="ip"> Ip for connection </param>
+        /// <param name="port"> Port for connection </param>
         public void connect(string ip, int port)
         {
             this.telnetClient.connect(ip, port);
         }
 
+        /// <summary>
+        /// Start Method, running a thread which gets the relevant data from server every 0.25 seconds.
+        /// </summary>
         public void start()
         {
-            new Thread(delegate ()
+            this.srartThread = new Thread(delegate ()
             {
+                Stopwatch stopwatch = new Stopwatch();
+
                 while (true)
                 {
-                    // get all dashboard data
-                    IndicatedHeadingDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg\n")), 3);
-                    IndicatedVerticalSpeed = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed\n")), 3);
-                    IndicatedGroundSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt\n")), 3);
-                    IndicatedSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt\n")), 3);
-                    IndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft\n")), 3);
-                    InternalRollDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg\n")), 3);
-                    InternalPitchDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg\n")), 3);
-                    AltimeterIndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft\n")), 3);
-                    // get longtitude
-                    double longtitude = double.Parse(this.telnetClient.read("get /position/longitude-deg\n"));
-                    // get altitude
-                    double latitude = double.Parse(this.telnetClient.read("get /position/latitude-deg\n"));
-                    Location = new Location(latitude, longtitude);
-                    //sleep for 1/4 second
-                    Thread.Sleep(250);
+                    try
+                    {
+                        // Get all dashboard values from server (only the first 5 characters).
+                        IndicatedHeadingDeg = Truncate(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg\n"), 5);
+                        IndicatedVerticalSpeed = Truncate(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed\n"), 5);
+                        IndicatedGroundSpeedKt = Truncate(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt\n"), 5);
+                        IndicatedSpeedKt = Truncate(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt\n"), 5);
+                        IndicatedAltitudeFt = Truncate(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft\n"), 5);
+                        InternalRollDeg = Truncate(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg\n"), 5);
+                        InternalPitchDeg = Truncate(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg\n"), 5);
+                        AltimeterIndicatedAltitudeFt = Truncate(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft\n"), 5);
+                        // Get the airplane location values (for replacing correctly the pushpin on the map).
+                        double longtitude = double.Parse(this.telnetClient.read("get /position/longitude-deg\n"));
+                        double latitude = double.Parse(this.telnetClient.read("get /position/latitude-deg\n"));
+                        Location = new Location(latitude, longtitude);
+                        // Sleeping - so the server won't be overloaded. 
+                        Thread.Sleep(250);
+                        // If Slowness error message apppears (stopwatch turned on)
+                        // show the slowness message for 5 seconds and then remove it.
+                        if (stopwatch.ElapsedMilliseconds > 5000)
+                        {
+                            Slowness = "";
+                            stopwatch.Reset();
+                        }
+                    }
+                    // If an IO exception is catched (means slowness / disconnection occured):
+                    catch (IOException io)
+                    {
+                        // Display the relevant error message for each case.
+                        if (this.telnetClient.isConnected() == true)
+                        {
+                            Slowness = "Slowness was detected";
+                            stopwatch.Start();
+                        }
+                        else
+                        {
+                            Slowness = "Server is down";
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("\n\n\n\n\n*************Thread got an exeption:**************\n");
+                        Console.WriteLine(e.Message + "\n\n\n\n\n");
+                    }
                 }
-            }).Start();
+            });
+            srartThread.Start();
         }
 
+        /// <summary>
+        /// Disconnection method.
+        /// </summary>
         public void disconnect()
         {
-            this.stop = true;
             this.telnetClient.disconnect();
         }
 
+        /// <summary>
+        ///  Implemented as a demand of the derivd class.
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        // Properties
+        public string Slowness
+        {
+            get
+            {
+                return this.slowness;
+            }
+            set
+            {
+                if (this.slowness != value)
+                {
+                    this.slowness = value;
+                    NotifyPropertyChanged("Slowness");
+                }
+            }
+        }
 
-
-        public double Rudder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Elevator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Aileron { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double Throttle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Rudder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Elevator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Aileron { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Throttle { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Thread StartThread { get => srartThread; }
         public Location Location
         {
             get { return this.location; }
@@ -131,7 +196,7 @@ namespace FlightSimulator
                 this.planeOutOfMap = value; 
                 NotifyPropertyChanged("PlaneOutOfMap"); } }
 
-        public double IndicatedHeadingDeg
+        public string IndicatedHeadingDeg
         {
             get
             {
@@ -148,7 +213,7 @@ namespace FlightSimulator
             }
         }
 
-        public double IndicatedVerticalSpeed
+        public string IndicatedVerticalSpeed
         {
             get { return this.indicatedVerticalSpeed; }
             set
@@ -160,7 +225,7 @@ namespace FlightSimulator
                 }
             }
         }
-        public double IndicatedGroundSpeedKt
+        public string IndicatedGroundSpeedKt
         {
             get { return this.indicatedGroundSpeedKt; }
             set
@@ -172,7 +237,7 @@ namespace FlightSimulator
                 }
             }
         }
-        public double IndicatedSpeedKt
+        public string IndicatedSpeedKt
         {
             get { return this.indicatedSpeedKt; }
             set
@@ -184,7 +249,7 @@ namespace FlightSimulator
                 }
             }
         }
-        public double IndicatedAltitudeFt
+        public string IndicatedAltitudeFt
         {
             get { return this.indicatedAltitudeFt; }
             set
@@ -196,7 +261,7 @@ namespace FlightSimulator
                 }
             }
         }
-        public double InternalRollDeg
+        public string InternalRollDeg
         {
             get { return this.internalRollDeg; }
             set
@@ -208,7 +273,7 @@ namespace FlightSimulator
                 }
             }
         }
-        public double InternalPitchDeg
+        public string InternalPitchDeg
         {
             get { return this.internalPitchDeg; }
             set
@@ -220,7 +285,7 @@ namespace FlightSimulator
                 }
             }
         }
-        public double AltimeterIndicatedAltitudeFt
+        public string AltimeterIndicatedAltitudeFt
         {
             get { return this.altimeterIndicatedAltitudeFt; }
             set
@@ -241,10 +306,11 @@ namespace FlightSimulator
         {
             //its null but will be initialized.
             string command = null;
-            if(paramName.Equals("throttle"))
+            if (paramName.Equals("throttle"))
             {
                 command = "set /controls/engines/current-engine/throttle " + value + "\n";
-            } else if (paramName.Equals("aileron"))
+            }
+            else if (paramName.Equals("aileron"))
             {
                 command = "set /controls/flight/aileron " + value + "\n";
             }
@@ -258,6 +324,19 @@ namespace FlightSimulator
             }
             telnetClient.write(command);
 
+        }
+
+        /// <summary>
+        /// Helper method.
+        /// Gets string and length and returns a substring of this string in the given length.
+        /// </summary>
+        /// <param name="value"> The string </param>
+        /// <param name="maxLength"> Length of the returned string </param>
+        /// <returns></returns>
+        public string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
         }
     }
 }

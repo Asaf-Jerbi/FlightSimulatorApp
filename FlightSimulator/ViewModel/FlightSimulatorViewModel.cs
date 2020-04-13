@@ -1,13 +1,14 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.ComponentModel;
-
+using System.Configuration;
+using System.Windows.Input;
 
 namespace FlightSimulator
 {
     class FlightSimulatorViewModel : INotifyPropertyChanged
     {
-        //Fields
+        // Fields.
         private IFightSimulatorModel model;
         private string ip;
         private int port;
@@ -26,7 +27,6 @@ namespace FlightSimulator
                 {
                     NotifyPropertyChanged("VM_" + e.PropertyName);
                 };
-            //VM_PlaneOutOfMap = false;
         }
 
 
@@ -41,7 +41,7 @@ namespace FlightSimulator
 
 
         /// <summary>
-        /// 
+        /// Implemented as a demand of the derivd class.
         /// </summary>
         /// <param name="propertyName"></param>
         protected void NotifyPropertyChanged(string propertyName)
@@ -50,7 +50,7 @@ namespace FlightSimulator
         }
 
 
-        //===========All properties===========
+        // Properties:
         public string Ip
         {
             get { return this.ip; }
@@ -59,7 +59,6 @@ namespace FlightSimulator
                 if (ip != value)
                 {
                     ip = value;
-                    NotifyPropertyChanged("Ip");
                 }
             }
         }
@@ -71,12 +70,17 @@ namespace FlightSimulator
                 if (port != value)
                 {
                     port = value;
-                    NotifyPropertyChanged("Port");
                 }
             }
         }
 
-        public double VM_IndicatedHeadingDeg
+        public string VM_Slowness 
+        {
+            get { return this.model.Slowness; }
+            set { } 
+        }
+
+        public string VM_IndicatedHeadingDeg
         {
             get { return this.model.IndicatedHeadingDeg; }
             set { }
@@ -88,42 +92,42 @@ namespace FlightSimulator
             set { }
         }
 
-        public double Throttle
+        public string Throttle
         {
             get { return model.Throttle; }
         }
-        public double VM_IndicatedVerticalSpeed
+        public string VM_IndicatedVerticalSpeed
         {
             get { return this.model.IndicatedVerticalSpeed; }
             set { }
         }
-        public double VM_IndicatedGroundSpeedKt
+        public string VM_IndicatedGroundSpeedKt
         {
             get { return this.model.IndicatedGroundSpeedKt; }
             set { }
         }
-        public double VM_IndicatedSpeedKt
+        public string VM_IndicatedSpeedKt
         {
             get { return this.model.IndicatedSpeedKt; }
             set { }
         }
-        public double VM_IndicatedAltitudeFt
+        public string VM_IndicatedAltitudeFt
         {
             get { return this.model.IndicatedAltitudeFt; }
             set { }
         }
 
-        public double VM_InternalRollDeg
+        public string VM_InternalRollDeg
         {
             get { return this.model.InternalRollDeg; }
             set { }
         }
-        public double VM_InternalPitchDeg
+        public string VM_InternalPitchDeg
         {
             get { return this.model.InternalPitchDeg; }
             set { }
         }
-        public double VM_AltimeterIndicatedAltitudeFt
+        public string VM_AltimeterIndicatedAltitudeFt
         {
             get { return this.model.AltimeterIndicatedAltitudeFt; }
             set { }
