@@ -44,18 +44,18 @@
                         ValueChanged="aileronSlider_ValueChanged"
                         Value="{Binding VM_aileron, Mode=OneWayToSource}"/>
         <!--Joystick-->
-        <views:joystick x:Name="joystick" Grid.Column="1" Grid.ColumnSpan="2"
+        <local:joystick x:Name="joystick" Grid.Column="1" Grid.ColumnSpan="2"
                                 Margin="5" Grid.Row="2" Grid.RowSpan="2" rudder="{Binding Path=VM_rudder, Mode=OneWayToSource}"
                         elevator="{Binding Path=VM_elevator, Mode=OneWayToSource}">
-            <views:joystick.RenderTransform>
+            <local:joystick.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.45" ScaleY="0.45"/>
                     <SkewTransform/>
                     <RotateTransform/>
                     <TranslateTransform/>
                 </TransformGroup>
-            </views:joystick.RenderTransform>
-        </views:joystick>
+            </local:joystick.RenderTransform>
+        </local:joystick>
         <!--rudder text block-->
         <TextBlock x:Name="rudderText" Grid.Column="2" Grid.Row="1" Margin="2" HorizontalAlignment="Left" Text="rudder" FontWeight="Bold"
                    VerticalAlignment="Top"></TextBlock>

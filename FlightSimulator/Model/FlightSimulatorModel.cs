@@ -26,7 +26,7 @@ namespace FlightSimulator
         private string internalPitchDeg;
         private string altimeterIndicatedAltitudeFt;
         private string planeOutOfMap;
-
+        private bool outOfMap;
         // UI errors values.
         private string slowness;
 
@@ -34,7 +34,8 @@ namespace FlightSimulator
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="telnetClient">telnet client to connect with to server</param>        public FlightSimulatorModel(ITelnetClient telnetClient)
+        /// <param name="telnetClient">telnet client to connect with to server</param>
+        public FlightSimulatorModel(ITelnetClient telnetClient)
         {
             this.telnetClient = telnetClient;
         }
