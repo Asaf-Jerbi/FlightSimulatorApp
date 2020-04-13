@@ -48,7 +48,7 @@
                 <Ellipse x:Name="error2" Grid.Row="1" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
                      Height="10" Width="10" Margin="5" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"
-                       FontSize="15" FontWeight="SemiBold"><Run Text="error2"/></TextBlock>
+                       FontSize="15" FontWeight="SemiBold" Text="{Binding Path=VM_Slowness}"></TextBlock>
                 <Ellipse x:Name="error3" Grid.Row="2" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
                      Height="10" Width="10" Margin="5" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center"
@@ -56,7 +56,7 @@
                 <Button Grid.Column="3" Grid.Row="1" Margin="10"
                         Grid.RowSpan="3" MaxWidth="150" FontWeight="Bold"
                         Background="#FFFF2727" BorderBrush="Black"
-                        BorderThickness="3" Content="Disconnect"/>
+                        BorderThickness="3" Content="Disconnect" Click="DisconnectButton_Click" Command="{Binding IsDisconnected}"/>
 
             </Grid>
         </Border>

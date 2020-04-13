@@ -38,7 +38,7 @@
         <TextBlock Grid.Row="2" Grid.Column="1" FontSize="28" FontWeight="SemiBold" Margin="10">
             Ip Address
         </TextBlock>
-        <TextBox x:Name="ipAddress"  Grid.Row="2" Grid.Column="2" Width="300" Margin="10" Text="{Binding Path=Ip, Mode=Default}"  >
+        <TextBox x:Name="ipAddress"  Grid.Row="2" Grid.Column="2" Width="300" Margin="10" Text="{Binding Path=Ip, Mode=Default}">
 
         </TextBox>
         <!--port field-->
@@ -54,8 +54,8 @@
                 FontWeight="Bold" Click="connectButton_Click"/>
         <Button x:Name="ExitButton" Content="Exit" Grid.Row="5" Grid.Column="4" 
                 Margin="10" MaxHeight="50" MaxWidth="150" Background="red"
-                FontWeight="Bold" Click="connectButton_Click"/>
-        <TextBlock x:Name="errorLabel" Text="Couldn't connect to server" Grid.Column="2" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Width="436"
-               Visibility="Hidden" FontSize="20" FontWeight="SemiBold" Foreground="#FFF50707" />
+                FontWeight="Bold" Click="ExitButton_Click"/>
+        <TextBlock x:Name="errorLabel" Text="  Couldn't connect to server (maybe one or more details are wrong or the server is down)  " HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Width="856"
+               Visibility="Hidden" FontSize="20" FontWeight="SemiBold" Foreground="#FFF50707" Margin="68,0,28.5,0" Grid.Column="1" />
     </Grid>
 </Window>
