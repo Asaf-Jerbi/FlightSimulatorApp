@@ -13,6 +13,7 @@ namespace FlightSimulator
         void connect(string ip, int port);
         void disconnect();
         void start();
+        void set(string varName,double value);
 
         double Rudder { get; set; }
         double Elevator { get; set; }

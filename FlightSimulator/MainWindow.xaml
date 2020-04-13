@@ -28,7 +28,7 @@
         </Grid.RowDefinitions>
         <!--Define our window background-->
         <Grid.Background>
-            <ImageBrush ImageSource="IsraelAirPlan.png"/>
+            <ImageBrush ImageSource="Pictures\IsraelAirPlan.png"/>
         </Grid.Background>
         <TextBlock Grid.Row="1" Grid.Column="1" FontSize="35" Margin="10" FontWeight="Bold"
                    Grid.ColumnSpan="2">

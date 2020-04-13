@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.ComponentModel;
+using System.Text;
 using System.Threading;
 
 namespace FlightSimulator
@@ -44,14 +45,14 @@ namespace FlightSimulator
                 while (true)
                 {
                     // get all dashboard data
-                    IndicatedHeadingDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg \r\n")), 3);
-                    IndicatedVerticalSpeed = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed \r\n")), 3);
-                    IndicatedGroundSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt \r\n")), 3);
-                    IndicatedSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt \r\n")), 3);
-                    IndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft \r\n")), 3);
-                    InternalRollDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg \r\n")), 3);
-                    InternalPitchDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg \r\n")), 3);
-                    AltimeterIndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft \r\n")), 3);
+                    IndicatedHeadingDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/heading-indicator/indicated-heading-deg\n")), 3);
+                    IndicatedVerticalSpeed = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-vertical-speed\n")), 3);
+                    IndicatedGroundSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-ground-speed-kt\n")), 3);
+                    IndicatedSpeedKt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/airspeed-indicator/indicated-speed-kt\n")), 3);
+                    IndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/gps/indicated-altitude-ft\n")), 3);
+                    InternalRollDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-roll-deg\n")), 3);
+                    InternalPitchDeg = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/attitude-indicator/internal-pitch-deg\n")), 3);
+                    AltimeterIndicatedAltitudeFt = Math.Round(Double.Parse(telnetClient.read("get /instrumentation/altimeter/indicated-altitude-ft\n")), 3);
                     // get longtitude
                     double longtitude = double.Parse(this.telnetClient.read("get /position/longitude-deg\n"));
                     // get altitude
@@ -86,6 +87,14 @@ namespace FlightSimulator
             set
             {
                 this.location = value;
+                //keeping in the right range.
+                if(value.Latitude > 85)
+                {
+                    location.Latitude = 85;
+                } else if (value.Latitude < -85)
+                {
+                    location.Latitude = -85;
+                }
                 NotifyPropertyChanged("Location");
             }
         }
@@ -191,8 +200,32 @@ namespace FlightSimulator
                 }
             }
         }
+        /// <summary>
+        /// this method make a set command to sent to the server
+        /// </summary>
+        /// <param name="paramName"> the parameter name</param>
+        /// <param name="value">the parameter value</param>
+        public void set(string paramName, double value)
+        {
+            //its null but will be initialized.
+            string command = null;
+            if(paramName.Equals("throttle"))
+            {
+                command = "set /controls/engines/current-engine/throttle " + value + "\n";
+            } else if (paramName.Equals("aileron"))
+            {
+                command = "set /controls/flight/aileron " + value + "\n";
+            }
+            else if (paramName.Equals("elevator"))
+            {
+                command = "set /controls/flight/elevator " + value + "\n";
+            }
+            else if (paramName.Equals("rudder"))
+            {
+                command = "set /controls/flight/rudder " + value + "\n";
+            }
+            telnetClient.write(command);
 
-
-
+        }
     }
 }

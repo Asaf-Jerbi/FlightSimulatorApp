@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="ELAL.png"/>
+            <ImageBrush ImageSource="Pictures\ELAL.png"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -123,9 +123,9 @@
         </Border>
         <!--Controls-->
         <Border BorderBrush="Black" BorderThickness="3" 
-                Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3">
-            <local:WheelsControl>
-            
+                Grid.Row="2" Grid.Column="2" Margin="3" Grid.RowSpan="3" DataContext="WheelsControlVM">
+            <local:WheelsControl x:Name="wheelsControl">
+
             </local:WheelsControl>
         </Border>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.ViewModel;
+using System;
 using System.Configuration;
 using System.Windows;
 
@@ -12,13 +13,16 @@ namespace FlightSimulator
     {
 
         FlightSimulatorViewModel fs_ViewModel;
+        private IFightSimulatorModel model;
 
         public MainWindow()
         {
             InitializeComponent();
-            IFightSimulatorModel model = new FlightSimulatorModel(new MyTelnetClient());
-            fs_ViewModel = new FlightSimulatorViewModel(model);
+            this.model = new FlightSimulatorModel(new MyTelnetClient());
+            fs_ViewModel = new FlightSimulatorViewModel(this.model);
             DataContext = fs_ViewModel; //here for binding the ip, port, etc
+
+            
         }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
@@ -26,16 +30,19 @@ namespace FlightSimulator
             try
             {
                 //connect to server   
-                this.fs_ViewModel.connect(); 
+                this.fs_ViewModel.connect();
+                //open simulator window
+                SimulatorWindow objSimulator = new SimulatorWindow();
+                objSimulator.wheelsControl.DataContext = new WheelsControlVM(this.model);
+                this.Visibility = Visibility.Hidden;
+                objSimulator.DataContext = fs_ViewModel;
+                objSimulator.Show();
+                this.Close();
             } catch (Exception exception)
             {
                 this.errorLabel.Visibility = Visibility.Visible;
             }
-                //open simulator window
-                SimulatorWindow objSimulator = new SimulatorWindow();
-                this.Visibility = Visibility.Hidden;
-                objSimulator.DataContext = fs_ViewModel;
-                objSimulator.Show();            
+
         }
     }
 }
