@@ -21,6 +21,8 @@ namespace FlightSimulator
         private double internalRollDeg;
         private double internalPitchDeg;
         private double altimeterIndicatedAltitudeFt;
+        private string planeOutOfMap;
+        private bool outOfMap;
 
         /// <summary>
         /// Constructor
@@ -30,6 +32,7 @@ namespace FlightSimulator
         {
             this.telnetClient = telnetClient;
             this.stop = false;
+            this.outOfMap = false;
         }
 
 
@@ -88,38 +91,45 @@ namespace FlightSimulator
             {
                 this.location = value;
                 //keeping in the right range.
-                if(value.Latitude > 90)
+                if(this.location.Latitude > 90)
                 {
                     location.Latitude = 90;
-                    PlaneOutOfMap = true;
-                } else if (value.Latitude < -90)
+                    this.PlaneOutOfMap = "Plane Out of map";
+                    outOfMap = true;
+                } else if (this.location.Latitude < -90)
                 {
                     location.Latitude = -90;
-                    PlaneOutOfMap = true;
+                    PlaneOutOfMap = "Plane Out of map";
+                    outOfMap = true;
                 }
                 else
                 {
-                    PlaneOutOfMap = false;
+                    PlaneOutOfMap = "";
+                    outOfMap = false;
                 }
-                if (value.Longitude > 180)
+                if (this.location.Longitude > 180)
                 {
                     location.Longitude = 180;
-                    PlaneOutOfMap = true;
+                    PlaneOutOfMap = "Plane Out of map";
                 }
-                else if (value.Longitude < -180)
+                else if (this.location.Longitude < -180)
                 {
                     location.Longitude = -180;
-                    PlaneOutOfMap = true;
+                    PlaneOutOfMap = "Plane Out of map";
                 } else
-                {
-                    PlaneOutOfMap = false;
+                {   if (!outOfMap)
+                    {
+                        PlaneOutOfMap = "";
+                    }
                 }
                 NotifyPropertyChanged("Location");
             }
         }
-        public bool PlaneOutOfMap {
-            get { return this.PlaneOutOfMap; }
-            set { NotifyPropertyChanged("PlaneOutOfMap"); } }
+        public string PlaneOutOfMap {
+            get { return this.planeOutOfMap; }
+            set {
+                this.planeOutOfMap = value; 
+                NotifyPropertyChanged("PlaneOutOfMap"); } }
 
         public double IndicatedHeadingDeg
         {

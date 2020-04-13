@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:FlightSimulator.views" xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--Defining the map label-->
     <Grid>
         <m:Map x:Name="myMap" CredentialsProvider="kCJ1XBT1q5tpaOvjJsUa~JEDXylGa1P_YZ99KJ5qdPQ~Ah0_Rj2rku_BMbqcq0FBsXv3w2fzLlstrzliLkHEQLMFN5VlSN5WQolhiF8UCW3H" 
              Center="32.00,34.88" ZoomLevel="12"

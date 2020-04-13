@@ -20,19 +20,16 @@ namespace FlightSimulator.views
     /// </summary>
     public partial class joystick : UserControl
     {
-        //private bool mousePressed;
-        //Point knobCenter;
+        private Point firstPoint = new Point();
+
         public joystick()
         {
             InitializeComponent();
         }
         
-        //public double normalizedX { get; set; }
-        //public double normalizedY // elevator
-        //{
-        //    get; set;
-        //}
-
+        /*
+         * Dependency property to be able to bind joystick properties
+         */
         public static readonly DependencyProperty rudderProperty =
          DependencyProperty.Register("rudder", typeof(double),typeof(joystick));
         public double rudder
@@ -51,11 +48,11 @@ namespace FlightSimulator.views
                 SetValue(elevatorProperty, value);
             }
         }   
-        private void centerKnob_Completed(object sender, EventArgs e) { }
-        private Point firstPoint = new Point();
-        //double x1, y1, x2, y2;
-
-
+        /// <summary>
+        /// Event hadeler when mouse is presed on know
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Knob_MouseDown(object sender, MouseButtonEventArgs e)
         {
            if(e.ChangedButton == MouseButton.Left)
@@ -65,7 +62,13 @@ namespace FlightSimulator.views
             }
         }
 
-        
+        /// <summary>
+        ///  This function take care of know event when mouse clicked and moved at the same time
+        ///  we take care that the know wont be able to get out of the joystick , but keep move as long
+        ///  as the mouse still pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
             double slope ,absX, absY;
@@ -74,8 +77,10 @@ namespace FlightSimulator.views
                 //calculating lineare quation to find points at radius distance from base if mouse go out.
                 double x = e.GetPosition(this).X - firstPoint.X;
                 double y = e.GetPosition(this).Y - firstPoint.Y;
+                //if mouse position is out of joystick range
                 if (Math.Sqrt(x * x + y * y) > Base.Width / 2)
                 {
+                    //handling all cases, because the y axis is opposite
                     if (x == 0)
                     {
                         if (y > 0)
@@ -133,6 +138,7 @@ namespace FlightSimulator.views
                         }
                     }
                 }
+                //else know position in joystick range
                 else
                 {
                     knobPosition.X = x;
@@ -144,30 +150,20 @@ namespace FlightSimulator.views
             elevator = knobPosition.Y / -170;
         }
 
-        /*
-        * Helpin methos to calculate mouse movement length
-        */
-        private double distanceFromKnobCenter(double x, double y)
-        {
-            return Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
-        }
+        /// <summary>
+        /// Mouse click release event handeler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Knob_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            //initial values to start values
             knobPosition.X = 0;
             knobPosition.Y = 0;
             rudder = 0;
             elevator = 0;
             UIElement element = (UIElement)Knob;
             element.ReleaseMouseCapture();
-            //mousePressed = false;
         }
-        
-        //private void Knob_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    knobPosition.X = 0;
-        //    knobPosition.Y = 0;
-        //    rudder = 0;
-        //    elevator = 0;
-        //}
     }
 }

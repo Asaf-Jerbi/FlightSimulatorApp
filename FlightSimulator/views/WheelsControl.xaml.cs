@@ -20,24 +20,28 @@ namespace FlightSimulator
     /// </summary>
     public partial class WheelsControl : UserControl
     {
-        private double aileron;
-        private double throttle;
+
         public WheelsControl()
         {
             InitializeComponent();
             //this.DataContext = new ViewModel.WheelsControlVM();
         }
+        /// <summary>
+        /// Slider moving event handeler
+        /// </summary>
         private void aileronSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //getting new value and showing on screen
             double x = aileronSlider.Value;
             //Console.WriteLine(x);
             aileronValText.Text = Math.Round(x, 3).ToString();
         }
-        /*
-         * throttle slider change event handeler
-         */
+        /// <summary>
+        /// Slider moving event handeler
+        /// </summary>
         private void throttleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            //getting new value and showing on screen
             double x = throttleSlider.Value;
             throttleValText.Text = Math.Round(x,3).ToString();
             //Console.WriteLine(x);

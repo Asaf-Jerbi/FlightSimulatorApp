@@ -23,7 +23,9 @@ namespace FlightSimulator
 
             
         }
-
+        /// <summary>
+        /// The logic after clicking the connect button
+        /// </summary>
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {            
             try
@@ -32,8 +34,10 @@ namespace FlightSimulator
                 this.fs_ViewModel.connect(); 
                 //open simulator window
                 SimulatorWindow objSimulator = new SimulatorWindow();
+                //Matching data context to Wheels contor VM and the whhels control view.
                 objSimulator.wheelsControl.DataContext = new WheelsControlVM(this.model);
                 this.Visibility = Visibility.Hidden;
+                //matching data context to VM
                 objSimulator.DataContext = fs_ViewModel;
                 objSimulator.Show();
                 this.Close();
