@@ -113,7 +113,7 @@ namespace FlightSimulator
                 //that another thread by mistake can read instead of necessary information.
                 client.GetStream().Read(read, 0, 1024);
                 string data = Encoding.ASCII.GetString(read, 0, read.Length);
-                //Console.WriteLine("server response after writing: {0}", Double.Parse(data));
+                Console.WriteLine("server response after writing: {0}", data);
                 mutex.ReleaseMutex();
             }
             catch (Exception exception)

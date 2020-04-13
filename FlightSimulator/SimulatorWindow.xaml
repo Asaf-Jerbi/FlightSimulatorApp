@@ -42,17 +42,18 @@
                     <RowDefinition/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Errors" FontWeight="Bold" FontSize="15" FontStyle="Italic" Margin="5"
-                           ></TextBlock>
-                <Ellipse x:Name="error1" Grid.Row="1" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
+                <Ellipse x:Name="error1" Grid.Row="0" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
+                     Height="10" Width="10" Margin="5" VerticalAlignment="Center" Stroke="Black"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                       FontSize="15" FontWeight="Bold" Text="{Binding VM_PlaneOutOfMap}"><Run /></TextBlock>
+                <Ellipse x:Name="error2" Grid.Row="1" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
                      Height="10" Width="10" Margin="5" VerticalAlignment="Center" Stroke="Black"/>
                 <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"
-                       FontSize="15" FontWeight="Bold" Text="{Binding VM_PlaneOutOfMap}"><Run /></TextBlock>
-                <Ellipse x:Name="error2" Grid.Row="2" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
-                     Height="10" Width="10" Margin="5" VerticalAlignment="Center" Stroke="Black"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" VerticalAlignment="Center"
                        FontSize="15" FontWeight="SemiBold" Text="{Binding Path=VM_Slowness}"></TextBlock>
-                
+                <Ellipse x:Name="error3" Grid.Row="2" Grid.Column="0" Fill="Red" HorizontalAlignment="Center"
+                     Height="10" Width="10" Margin="5" VerticalAlignment="Center" Stroke="Black"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" VerticalAlignment="Center"
+                       FontSize="15" FontWeight="Bold" Grid.ColumnSpan ="3"><Run Text="Incorrect value from server"/></TextBlock>
                 <Button Grid.Column="3" Grid.Row="0" Margin="10"
                         Grid.RowSpan="2" MaxWidth="150" FontWeight="Bold"
                         Background="#FFFF2727" BorderBrush="Black"
